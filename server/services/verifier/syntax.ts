@@ -111,9 +111,18 @@ export function validateSyntax(email: string): SyntaxResult {
     return { valid: false, error: 'Email address format is invalid' };
   }
 
+  // Detect plus addressing (e.g., user+tag@domain.com)
+  const plusIndex = localPart.indexOf('+');
+  const plusAddressed = plusIndex > 0; // Must have chars before +
+  const normalizedLocalPart = plusAddressed
+    ? localPart.substring(0, plusIndex)
+    : localPart;
+
   return {
     valid: true,
     localPart,
     domain,
+    normalizedLocalPart,
+    plusAddressed,
   };
 }

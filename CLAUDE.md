@@ -72,6 +72,7 @@ vercel
   "success": true,
   "data": {
     "email": "user@example.com",
+    "normalized_email": null,
     "valid": true,
     "result": "deliverable",
     "checks": {
@@ -81,9 +82,23 @@ vercel
       "catch_all": false,
       "disposable": false,
       "role_based": false,
-      "free_provider": false
+      "free_provider": false,
+      "plus_addressed": false
     },
     "confidence": 0.95
+  }
+}
+```
+
+**Plus Addressing Example:**
+```json
+// Input: { "email": "user+newsletter@gmail.com" }
+{
+  "email": "user+newsletter@gmail.com",
+  "normalized_email": "user@gmail.com",
+  "checks": {
+    "plus_addressed": true,
+    // ...
   }
 }
 ```
