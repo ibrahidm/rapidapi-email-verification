@@ -91,7 +91,7 @@ export default defineEventHandler((event) => {
 
   // If rate limited, return 429
   if (!result.allowed) {
-    setHeader(event, 'Retry-After', result.resetIn.toString());
+    setHeader(event, 'Retry-After', result.resetIn);
     throw createError({
       statusCode: 429,
       statusMessage: 'Too Many Requests',
