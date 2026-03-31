@@ -13,14 +13,15 @@ Low-cost email verification API ($0.003/verification) distributed via RapidAPI. 
 ## Project Structure
 
 ```
+shared/
+  types/               # Shared types (use #shared/types alias)
 server/
   api/v1/              # Endpoints (verify.post.ts, verify/bulk.post.ts)
   middleware/          # RapidAPI validation
   services/verifier/   # Verification logic (syntax, mx, smtp, disposable)
   db/                  # Raw Postgres queries
   data/                # Static data (disposable domains, free providers, trusted providers)
-  utils/               # Validation helpers
-lib/                   # Shared types
+  utils/               # Validation helpers, LRU cache
 db/migrations/         # SQL migrations
 docs/adr/              # Architecture Decision Records
 test/                  # Unit and integration tests
