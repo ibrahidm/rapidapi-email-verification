@@ -193,7 +193,26 @@ DATABASE_URL
 RAPIDAPI_PROXY_SECRET
 SMTP_TIMEOUT_MS=10000
 SMTP_FROM_DOMAIN=yourdomain.com
+RATE_LIMIT_DISABLED=false     # Set to true to disable rate limiting (testing only)
 ```
+
+## Rate Limiting
+
+In-memory sliding window rate limiting provides burst protection:
+
+| Endpoint | Limit | Window |
+|----------|-------|--------|
+| `/api/v1/verify` | 100 requests | 1 minute |
+| `/api/v1/verify/bulk` | 10 requests | 1 minute |
+| `/api/v1/health` | 60 requests | 1 minute |
+
+Rate limit headers returned on every response:
+- `X-RateLimit-Limit` - Maximum requests allowed
+- `X-RateLimit-Remaining` - Requests remaining in window
+- `X-RateLimit-Reset` - Seconds until window resets
+- `Retry-After` - Included on 429 responses
+
+Note: RapidAPI also enforces subscription-level rate limits. This in-memory limiter provides additional burst protection but resets on serverless cold starts.
 
 ## Result Types
 

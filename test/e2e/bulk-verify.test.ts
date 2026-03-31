@@ -4,6 +4,9 @@ import { $fetch, setup } from '@nuxt/test-utils/e2e';
 describe('POST /api/v1/verify/bulk', async () => {
   await setup({
     server: true,
+    env: {
+      RATE_LIMIT_DISABLED: 'true',
+    },
   });
 
   describe('input validation', () => {

@@ -4,6 +4,9 @@ import { $fetch, setup } from '@nuxt/test-utils/e2e';
 describe('GET /api/v1/health', async () => {
   await setup({
     server: true,
+    env: {
+      RATE_LIMIT_DISABLED: 'true',
+    },
   });
 
   it('should return health status', async () => {
