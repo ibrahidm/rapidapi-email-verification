@@ -28,6 +28,7 @@ export interface VerificationChecks {
   disposable: boolean;
   role_based: boolean;
   free_provider: boolean;
+  plus_addressed: boolean;
 }
 
 // Provider info
@@ -39,6 +40,7 @@ export interface ProviderInfo {
 // Full verification data
 export interface VerificationData {
   email: string;
+  normalized_email?: string; // Base email without plus addressing (e.g., user@gmail.com from user+tag@gmail.com)
   valid: boolean;
   result: VerificationResult;
   checks: VerificationChecks;
@@ -112,6 +114,8 @@ export interface SyntaxResult {
   valid: boolean;
   localPart?: string;
   domain?: string;
+  normalizedLocalPart?: string; // Local part without plus tag
+  plusAddressed?: boolean;
   error?: string;
 }
 
